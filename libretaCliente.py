@@ -31,5 +31,17 @@ btnNew.grid(row=0, column=0)
 btnDel = Button(root, text= 'Eliminar Cliente', command=deleteClient)
 btnDel.grid(row=0, column=1)
 
+tree = ttk.Treeview(root)
+tree['columns']= ('Name', 'Contact', 'Company')
+tree.column('#0', width=0, stretch=NO)
+tree.column('Name')
+tree.column('Contact')
+tree.column('Company')
+
+tree.heading('Name', text=' Name ')
+tree.heading('Contact', text=' Contact ')
+tree.heading('Company', text=' Company ')
+
+tree.grid(row=1, column=0, columnspan=2)
 
 root.mainloop()
