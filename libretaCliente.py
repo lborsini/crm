@@ -4,7 +4,13 @@ from tkinter import ttk
 import sqlite3
 
 root = Tk()
-root.title('CRM')
+root.title('Customer Relationship Manager')
+root.config(background='#7DA2B3')
+root.geometry('650x325')
+root.resizable(0,0)
+
+table = Frame(root)
+table.grid(row=1, column=0, columnspan=2, padx=22, pady=15)
 
 conn = sqlite3.connect('crm.db')
 
@@ -62,24 +68,29 @@ def newClient ():
     #Create a new windows with the form
     top = Toplevel()
     top.title('New Client')
+    top.config(background='#7DA2B3')
+    top.geometry('530x205')
+    top.resizable(0,0)
 
-    lName = Label(top, text=' Name ')
-    lName.grid(row=0, column=0)
-    eName = Entry(top, width=40)
+    lName = Label(top, text=' Name ', background='#7DA2B3', font='Times')
+    lName.grid(row=0, column=0, padx=10, pady=10)
+    eName = Entry(top, width=40, bg='#FFFEFF', font='Times', relief='sunken', bd=2, fg='#000', justify='center')
     eName.grid(row=0, column=1)
 
-    lContact = Label(top, text=' Contact ')
-    lContact.grid(row=1, column=0)
-    eContact = Entry(top, width=40)
+    lContact = Label(top, text=' Contact ', background='#7DA2B3', font='Times')
+    lContact.grid(row=1, column=0, padx=10, pady=10)
+    eContact = Entry(top, width=40, bg='#FFFEFF', font='Times', relief='sunken', bd=2, fg='#000', justify='center')
     eContact.grid(row=1, column=1)
 
-    lCompany = Label(top, text=' Company ')
-    lCompany.grid(row=2, column=0)
-    eCompany = Entry(top, width=40)
+    lCompany = Label(top, text=' Company ', background='#7DA2B3', font='Times')
+    lCompany.grid(row=2, column=0, padx=10, pady=10)
+    eCompany = Entry(top, width=40, bg='#FFFEFF', font='Times', relief='sunken', bd=2, fg='#000', justify='center')
     eCompany.grid(row=2, column=1)
 
-    btnSave = Button(top, text='Save As', command=save)
-    btnSave.grid(row = 3, column= 1)
+    btnSave = Button(top, text='Save As', font=('Times', "10") ,background='#4DFC75', foreground='#000', bd=2, width=20, height=2, command=save)
+    btnSave.grid(row = 3, column= 1, padx=10, pady=10)
+
+    eName.focus()
 
     top.mainloop()
 
@@ -96,13 +107,13 @@ def deleteClient():
     else:
         pass
 
-btnNew = Button(root, text= 'Nuevo Cliente', command=newClient)
-btnNew.grid(row=0, column=0)
+btnNew = Button(root, text= 'Nuevo Cliente', font=('Times', "10") ,background='#4DFC75', foreground='#000', bd=2, width=20, height=2, command=newClient)
+btnNew.grid(row=0, column=0, padx=10, pady=10)
 
-btnDel = Button(root, text= 'Eliminar Cliente', command=deleteClient)
+btnDel = Button(root, text= 'Eliminar Cliente', font=('Times', "10"), background='#FF6762', foreground='#000', bd=2, width=20, height=2, command=deleteClient)
 btnDel.grid(row=0, column=1)
 
-tree = ttk.Treeview(root)
+tree = ttk.Treeview(table)
 tree['columns']= ('Name', 'Contact', 'Company')
 tree.column('#0', width=0, stretch=NO)
 tree.column('Name')
@@ -114,6 +125,7 @@ tree.heading('Contact', text=' Contact ')
 tree.heading('Company', text=' Company ')
 
 tree.grid(row=1, column=0, columnspan=2)
+ttk.Style().configure('Treeview', background='#FFFEFF ', foreground='#000', font='Times', padx=20, pady=20 )
 
 renderClient()
 
